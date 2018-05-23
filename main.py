@@ -8,7 +8,7 @@ import deep_q_network
 observation = "PLACEHOLDER"
 env = "PLACEHOLDER"
 dqn = deep_q_network.dqn(4, memory_capacity=500, target_replacement_rate= 200, learning_rate=0.01)
-
+k = 4
 
 for episode in range(0, 1000):
     step = 0
@@ -17,8 +17,9 @@ for episode in range(0, 1000):
         action = dqn.pick_action(observation)
         new_observation, reward, terminal = env.take_action(action)
         dqn.store(observation, action, reward, new_observation, terminal)
-        dqn.train()
 
+        if (step % k == 0):
+            dqn.train()
 
         observation = new_observation
 

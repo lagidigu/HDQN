@@ -1,7 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="027c33ca-90cc-400a-8b03-12b521dc8322" name="Default" comment="" />
+    <list default="true" id="027c33ca-90cc-400a-8b03-12b521dc8322" name="Default" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/deep_q_network.py" beforeDir="false" afterPath="$PROJECT_DIR$/deep_q_network.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
+    </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -11,11 +15,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="main.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="main.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/main.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="297">
-              <caret line="9" column="97" selection-start-line="9" selection-start-column="97" selection-end-line="9" selection-end-column="97" />
+            <state relative-caret-position="300">
+              <caret line="21" column="12" selection-start-line="21" selection-start-column="12" selection-end-line="21" selection-end-column="12" />
               <folding>
                 <element signature="e#0#23#0" expanded="true" />
               </folding>
@@ -23,11 +27,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="deep_q_network.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="deep_q_network.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/deep_q_network.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="400">
-              <caret line="70" column="132" selection-start-line="70" selection-start-column="132" selection-end-line="70" selection-end-column="132" />
+            <state relative-caret-position="350">
+              <caret line="104" column="28" lean-forward="true" selection-start-line="104" selection-start-column="28" selection-end-line="104" selection-end-column="28" />
               <folding>
                 <element signature="e#0#18#0" expanded="true" />
               </folding>
@@ -44,12 +48,15 @@
       </list>
     </option>
   </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
         <option value="$PROJECT_DIR$/dqn.py" />
-        <option value="$PROJECT_DIR$/main.py" />
         <option value="$PROJECT_DIR$/deep_q_network.py" />
+        <option value="$PROJECT_DIR$/main.py" />
       </list>
     </option>
   </component>
@@ -59,6 +66,7 @@
     <option name="width" value="1750" />
     <option name="height" value="970" />
   </component>
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
     <navigator proportions="" version="1">
       <foldersAlwaysOnTop value="true" />
@@ -115,12 +123,12 @@
     <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.15820312" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.075520836" />
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Event Log" order="7" side_tool="true" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.32965517" />
       <window_info anchor="bottom" id="Run" order="2" />
-      <window_info anchor="bottom" id="Version Control" order="7" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Version Control" order="7" />
       <window_info anchor="bottom" id="Python Console" order="7" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info anchor="bottom" id="Terminal" order="7" />
@@ -178,22 +186,22 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/main.py">
+    <entry file="file://$PROJECT_DIR$/deep_q_network.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="297">
-          <caret line="9" column="97" selection-start-line="9" selection-start-column="97" selection-end-line="9" selection-end-column="97" />
+        <state relative-caret-position="350">
+          <caret line="104" column="28" lean-forward="true" selection-start-line="104" selection-start-column="28" selection-end-line="104" selection-end-column="28" />
           <folding>
-            <element signature="e#0#23#0" expanded="true" />
+            <element signature="e#0#18#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/deep_q_network.py">
+    <entry file="file://$PROJECT_DIR$/main.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="400">
-          <caret line="70" column="132" selection-start-line="70" selection-start-column="132" selection-end-line="70" selection-end-column="132" />
+        <state relative-caret-position="300">
+          <caret line="21" column="12" selection-start-line="21" selection-start-column="12" selection-end-line="21" selection-end-column="12" />
           <folding>
-            <element signature="e#0#18#0" expanded="true" />
+            <element signature="e#0#23#0" expanded="true" />
           </folding>
         </state>
       </provider>

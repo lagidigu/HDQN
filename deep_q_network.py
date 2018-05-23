@@ -2,12 +2,13 @@ import numpy as np
 import tensorflow as tf
 
 class dqn:
-    def __init__(self, num_actions, memory_capacity, target_replacement_rate, batch_size, epsilon, learning_rate, discount_factor = 0.99):
+    def __init__(self, num_actions, memory_capacity, target_replacement_rate, batch_size, epsilon, decay_rate, learning_rate, discount_factor = 0.99):
         self.num_actions = num_actions
         self.memory_capacity = memory_capacity
         self.target_replacement_rate = target_replacement_rate
         self.batch_size = batch_size
-        self.epsilon = epsilon  # TODO: Decay the epsilon
+        self.epsilon = epsilon
+        self.decay_rate = decay_rate
         self.learning_rate = learning_rate
 
         self.discount_factor = discount_factor
@@ -59,7 +60,7 @@ class dqn:
         self.update_loss()
 
     def update_target_q(self):
-        self.q_target = self.input_reward + self.discount_factor * tf.reduce_max(self.target_network, axis=1)
+        self.q_target = self.input_reward + self.discount_factor * tf.reduce_max(self.target_network, axis=1) #TODO: How is this recursive?
         self.q_target = tf.stop_gradient(self.q_target)  # No Gradient descent because target network gets updated separately
 
     def update_q_network(self):
@@ -93,7 +94,17 @@ class dqn:
         else:
             indeces = np.random.choice(self.current_time_step, size=self.batch_size)
         batch = self.experience_buffer[indeces, :]
+
+
         #TODO: Update the network weights
+
+
+        self.train_iteration += 1
+        self.decay_epsilon()
+
+    def decay_epsilon(self):
+        if (self.epsilon > 0.1):
+            self.epsilon -= self.decay_rate
 
     def reset_target_params(self):
         self.q_network_params = tf.get_collection(tf.GraphKeys.GLOBAL_VARIABLES, scope="q_network")
