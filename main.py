@@ -1,20 +1,26 @@
 import tensorflow as tf
 import numpy as np
-
+import env
 import deep_q_network
 
 #http://www.davidqiu.com:8888/research/nature14236.pdf
 
-observation = "PLACEHOLDER"
-env = "PLACEHOLDER"
-dqn = deep_q_network.dqn(4, memory_capacity=500, target_replacement_rate= 200, learning_rate=0.01)
+env = env.Env(size = 5)
+observation = env.give_observations()
+dqn = deep_q_network.dqn(env.num_actions, env.num_features, memory_capacity=500, target_replacement_rate= 200, epsilon=0.9, batch_size=32, decay_rate=0.0001, learning_rate=0.01)
 k = 4
+
+#TODO: Adjust the display to understand what is going on
+#TODO: Add punishment for getting out of bounds?
+
+#TODO: Adjust decay rate
+
 
 for episode in range(0, 1000):
     step = 0
     while True:
-        #get the new observation
         action = dqn.pick_action(observation)
+
         new_observation, reward, terminal = env.take_action(action)
         dqn.store(observation, action, reward, new_observation, terminal)
 
@@ -24,7 +30,7 @@ for episode in range(0, 1000):
         observation = new_observation
 
         if (terminal):
-            break;
+            break
 
         step += 1
 
