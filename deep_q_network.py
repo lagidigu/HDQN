@@ -78,7 +78,7 @@ class dqn:
     def pick_action(self, state):
         state = state[None, :]
         if (np.random.uniform() < self.epsilon):
-            action = np.random.randint(0, self.num_actions - 1) #TODO: Check -1
+            action = np.random.randint(0, self.num_actions)
         else:
             action_vals = self.session.run(self.q_network, feed_dict={self.input_state : state})
             action = np.argmax(action_vals)
@@ -110,6 +110,8 @@ class dqn:
     def decay_epsilon(self):
         if (self.epsilon > 0.1):
             self.epsilon -= self.decay_rate
+            #print("Epsilon: ", self.epsilon)
+
 
     def reset_target_params(self):
         self.q_network_params = tf.get_collection(tf.GraphKeys.GLOBAL_VARIABLES, scope="q_network")
