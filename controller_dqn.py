@@ -32,8 +32,8 @@ class dqn:
         self.update_beginning()
 
     def define_inputs(self):
-        self.input_state = tf.placeholder(tf.float32, [None, self.num_features])
-        self.input_state_next = tf.placeholder(tf.float32, [None, self.num_features])
+        self.input_state = tf.placeholder(tf.float32, [None, self.num_features * 2]) #last num of features represents goal
+        self.input_state_next = tf.placeholder(tf.float32, [None, self.num_features * 2])
         self.input_reward = tf.placeholder(tf.float32, [None, ])
         self.input_action = tf.placeholder(tf.int32, [None, ])
         self.terminal = tf.placeholder(tf.bool, [None, ])
@@ -68,7 +68,9 @@ class dqn:
 
     def store(self, state, action, reward, next_state, terminal):
         index = self.current_time_step % self.memory_capacity
-        experience = [state[0], state[1], action, reward, next_state[0], next_state[1], terminal] #TODO: Not n_feature dynamic!
+        #TODO: ENTRY POINT: Adjust the storing based on the inputs, where goal was added.
+        #TODO: But verify it first in the paper. 
+        experience = [state[0], state[1], state[0], state[1], action, reward, next_state[0], next_state[1], terminal] #TODO: Not n_feature dynamic!
 
         self.experience_buffer[index] = experience
         self.current_time_step += 1

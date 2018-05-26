@@ -34,8 +34,8 @@ class dqn:
     def define_inputs(self):
         self.input_state = tf.placeholder(tf.float32, [None, self.num_features])
         self.input_state_next = tf.placeholder(tf.float32, [None, self.num_features])
-        self.input_reward = tf.placeholder(tf.float32, [None, ])
-        self.input_action = tf.placeholder(tf.int32, [None, ])
+        self.input_goal = tf.placeholder(tf.int32, [None, self.num_features])
+        self.input_extrinsic_reward = tf.placeholder(tf.float32, [None, ])
         self.terminal = tf.placeholder(tf.bool, [None, ])
 
     def build_networks(self):
@@ -55,20 +55,20 @@ class dqn:
         self.update_loss()
 
     def update_q_target(self):
-        self.q_target = self.input_reward + self.discount_factor * tf.reduce_max(self.target_network, axis=1)
+        self.q_target = self.input_extrinsic_reward + self.discount_factor * tf.reduce_max(self.target_network, axis=1)
         self.q_target = tf.stop_gradient(self.q_target)  # No Gradient descent because target network gets updated separately
 
     def update_q_network(self):
-        action_one_hot = tf.one_hot(self.input_action, depth=self.num_actions, dtype=tf.float32)
+        action_one_hot = tf.one_hot(self.input_goal, depth=self.num_actions, dtype=tf.float32)
         self.q_value_for_action = tf.reduce_sum(self.q_network * action_one_hot, axis = 1)
 
     def update_loss(self):
         self.loss = tf.reduce_mean(tf.squared_difference(self.q_target, self.q_value_for_action))
         self.optimizer = tf.train.RMSPropOptimizer(self.learning_rate).minimize(self.loss)
 
-    def store(self, state, action, reward, next_state, terminal):
+    def store(self, state, goal, extrinsic_reward, next_state, terminal):
         index = self.current_time_step % self.memory_capacity
-        experience = [state[0], state[1], action, reward, next_state[0], next_state[1], terminal] #TODO: Not n_feature dynamic!
+        experience = [state[0], state[1], goal[0], goal[1], extrinsic_reward, next_state[0], next_state[1], terminal] #TODO: Not n_feature dynamic!
 
         self.experience_buffer[index] = experience
         self.current_time_step += 1
@@ -89,13 +89,20 @@ class dqn:
         batch = self.get_random_batch()
 
         _, __ = self.session.run([self.optimizer, self.loss], feed_dict={self.input_state : batch[:, :self.num_features],
-                                                                         self.input_action : batch[:, self.num_features],
-                                                                         self.input_reward : batch[:, self.num_features + 1],
-                                                                         self.input_state_next : batch[:, self.num_features + 2 : -1],
-                                                                         self.terminal : batch[:, -1]})
+                                                                         self.input_goal : batch[:, self.num_features:self.num_features * 2],
+                                                                         self.input_extrinsic_reward : batch[:, self.num_features * 2],
+                                                                         self.input_state_next : batch[:, self.num_features * 2 + 1 : -1],
+                                                                         self.terminal : batch[:, -1]}) #TODO: If this doesn't work, check that slicing is correct or make a static case
 
         self.train_iteration += 1
         self.decay_epsilon()
+
+    # TODO: Generalize? Paper hasnt done that yet.
+    def goal_reached(self, observation, goal):
+        reached = False
+        if (observation == goal):
+            reached = True
+        return reached
 
     def get_random_batch(self):
         if (self.current_time_step > self.memory_capacity):

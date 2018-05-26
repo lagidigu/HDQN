@@ -2,6 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="027c33ca-90cc-400a-8b03-12b521dc8322" name="Default" comment="">
+      <change afterPath="$PROJECT_DIR$/controller_dqn.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/meta_controller_dqn.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/deep_q_network.py" beforeDir="false" afterPath="$PROJECT_DIR$/deep_q_network.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/env.py" beforeDir="false" afterPath="$PROJECT_DIR$/env.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
@@ -18,8 +21,8 @@
       <file leaf-file-name="main.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/main.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-277">
-              <caret line="12" column="18" lean-forward="true" selection-start-line="12" selection-start-column="18" selection-end-line="12" selection-end-column="18" />
+            <state relative-caret-position="322">
+              <caret line="26" column="39" lean-forward="true" selection-start-line="26" selection-start-column="39" selection-end-line="26" selection-end-column="39" />
               <folding>
                 <element signature="e#0#23#0" expanded="true" />
               </folding>
@@ -27,24 +30,59 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="env.py" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/env.py">
+      <file leaf-file-name="meta_controller_dqn.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/meta_controller_dqn.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="237">
-              <caret line="88" lean-forward="true" selection-start-line="88" selection-end-line="88" />
+            <state relative-caret-position="222">
+              <caret line="96" column="10" selection-start-line="96" selection-start-column="10" selection-end-line="96" selection-end-column="10" />
               <folding>
                 <element signature="e#0#18#0" expanded="true" />
-                <element signature="e#2119#2270#0" />
+                <element signature="e#228#996#0" />
+                <element signature="e#1033#1115#0" />
+                <element signature="e#1538#1770#0" />
+                <element signature="e#1824#2044#0" />
+                <element signature="e#2086#2167#0" />
+                <element signature="e#2208#2435#0" />
+                <element signature="e#2477#2656#0" />
+                <element signature="e#2693#2873#0" />
+                <element signature="e#3262#3570#0" />
+                <element signature="e#4459#4764#0" />
+                <element signature="e#4803#4968#0" />
+                <element signature="e#5013#5343#0" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="deep_q_network.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/deep_q_network.py">
+      <file leaf-file-name="controller_dqn.py" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/controller_dqn.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="266">
-              <caret line="112" column="13" selection-start-line="112" selection-start-column="13" selection-end-line="112" selection-end-column="13" />
+            <state relative-caret-position="447">
+              <caret line="71" column="49" selection-start-line="71" selection-start-column="49" selection-end-line="71" selection-end-column="49" />
+              <folding>
+                <element signature="e#0#18#0" expanded="true" />
+                <element signature="e#1033#1115#0" />
+                <element signature="e#1538#1770#0" />
+                <element signature="e#1824#2044#0" />
+                <element signature="e#2086#2167#0" />
+                <element signature="e#2208#2435#0" />
+                <element signature="e#2477#2656#0" />
+                <element signature="e#2693#2873#0" />
+                <element signature="e#3262#3570#0" />
+                <element signature="e#3601#4417#0" />
+                <element signature="e#4459#4764#0" />
+                <element signature="e#4803#4968#0" />
+                <element signature="e#5013#5347#0" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="env.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/env.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-3630">
+              <caret line="2" column="14" selection-start-line="2" selection-start-column="14" selection-end-line="2" selection-end-column="14" />
               <folding>
                 <element signature="e#0#18#0" expanded="true" />
               </folding>
@@ -68,6 +106,8 @@
       <find>decay</find>
       <find>3</find>
       <find>todo</find>
+      <find>input_state_next</find>
+      <find>terminal</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -77,9 +117,12 @@
     <option name="CHANGED_PATHS">
       <list>
         <option value="$PROJECT_DIR$/dqn.py" />
-        <option value="$PROJECT_DIR$/deep_q_network.py" />
-        <option value="$PROJECT_DIR$/main.py" />
         <option value="$PROJECT_DIR$/env.py" />
+        <option value="$PROJECT_DIR$/deep_q_network.py" />
+        <option value="$PROJECT_DIR$/controller.py" />
+        <option value="$PROJECT_DIR$/meta_controller.py" />
+        <option value="$PROJECT_DIR$/main.py" />
+        <option value="$PROJECT_DIR$/controller_dqn.py" />
       </list>
     </option>
   </component>
@@ -89,13 +132,14 @@
     <option name="width" value="1750" />
     <option name="height" value="970" />
   </component>
-  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
   <component name="ProjectView">
     <navigator proportions="" version="1">
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -112,6 +156,7 @@
           <select />
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -167,13 +212,13 @@
     <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.0" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.0" />
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Event Log" order="7" side_tool="true" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.32965517" />
       <window_info anchor="bottom" id="Version Control" order="7" />
       <window_info anchor="bottom" id="Python Console" order="7" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.3613793" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.3613793" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info anchor="bottom" id="Terminal" order="7" />
       <window_info id="Favorites" order="2" side_tool="true" />
@@ -191,10 +236,100 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <option name="time" value="2" />
+      <option name="time" value="5" />
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/main.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="153">
+          <caret line="12" column="22" selection-start-line="12" selection-start-column="22" selection-end-line="12" selection-end-column="22" />
+          <folding>
+            <element signature="e#0#23#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/env.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="34">
+          <caret line="2" column="14" selection-start-line="2" selection-start-column="14" selection-end-line="2" selection-end-column="14" />
+          <folding>
+            <element signature="e#0#18#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/deep_q_network.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="714">
+          <caret line="43" column="49" lean-forward="true" selection-start-line="43" selection-start-column="49" selection-end-line="43" selection-end-column="49" />
+          <folding>
+            <element signature="e#0#18#0" expanded="true" />
+            <element signature="e#228#996#0" />
+            <element signature="e#1033#1115#0" />
+            <element signature="e#1154#1498#0" />
+            <element signature="e#1538#1770#0" />
+            <element signature="e#1825#2045#0" />
+            <element signature="e#2087#2168#0" />
+            <element signature="e#2209#2436#0" />
+            <element signature="e#2478#2657#0" />
+            <element signature="e#2694#2874#0" />
+            <element signature="e#2950#3219#0" />
+            <element signature="e#3263#3571#0" />
+            <element signature="e#3602#4418#0" />
+            <element signature="e#4460#4765#0" />
+            <element signature="e#4804#4969#0" />
+            <element signature="e#5014#5344#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/main.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="153">
+          <caret line="12" column="18" lean-forward="true" selection-start-line="12" selection-start-column="18" selection-end-line="12" selection-end-column="18" />
+          <folding>
+            <element signature="e#0#23#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/deep_q_network.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1887">
+          <caret line="112" column="13" selection-start-line="112" selection-start-column="13" selection-end-line="112" selection-end-column="13" />
+          <folding>
+            <element signature="e#0#18#0" expanded="true" />
+            <element signature="e#228#996#0" />
+            <element signature="e#1033#1115#0" />
+            <element signature="e#1154#1498#0" />
+            <element signature="e#1538#1770#0" />
+            <element signature="e#1825#2045#0" />
+            <element signature="e#2087#2168#0" />
+            <element signature="e#2209#2436#0" />
+            <element signature="e#2478#2657#0" />
+            <element signature="e#2694#2874#0" />
+            <element signature="e#2950#3219#0" />
+            <element signature="e#3263#3571#0" />
+            <element signature="e#3602#4418#0" />
+            <element signature="e#4460#4765#0" />
+            <element signature="e#4804#4969#0" />
+            <element signature="e#5014#5344#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/env.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="204">
+          <caret line="14" column="49" lean-forward="true" selection-start-line="14" selection-start-column="49" selection-end-line="14" selection-end-column="49" />
+          <folding>
+            <element signature="e#0#18#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/main.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="170">
@@ -211,7 +346,6 @@
           <caret line="55" lean-forward="true" selection-start-line="55" selection-end-line="55" />
           <folding>
             <element signature="e#0#18#0" expanded="true" />
-            <element signature="e#2119#2270#0" />
           </folding>
         </state>
       </provider>
@@ -222,6 +356,21 @@
           <caret line="78" column="29" selection-start-line="78" selection-start-column="29" selection-end-line="78" selection-end-column="29" />
           <folding>
             <element signature="e#0#18#0" expanded="true" />
+            <element signature="e#228#996#0" />
+            <element signature="e#1033#1115#0" />
+            <element signature="e#1154#1498#0" />
+            <element signature="e#1538#1770#0" />
+            <element signature="e#1825#2045#0" />
+            <element signature="e#2087#2168#0" />
+            <element signature="e#2209#2436#0" />
+            <element signature="e#2478#2657#0" />
+            <element signature="e#2694#2874#0" />
+            <element signature="e#2950#3219#0" />
+            <element signature="e#3263#3571#0" />
+            <element signature="e#3602#4418#0" />
+            <element signature="e#4460#4765#0" />
+            <element signature="e#4804#4969#0" />
+            <element signature="e#5014#5344#0" />
           </folding>
         </state>
       </provider>
@@ -242,6 +391,21 @@
           <caret line="104" column="28" lean-forward="true" selection-start-line="104" selection-start-column="28" selection-end-line="104" selection-end-column="28" />
           <folding>
             <element signature="e#0#18#0" expanded="true" />
+            <element signature="e#228#996#0" />
+            <element signature="e#1033#1115#0" />
+            <element signature="e#1154#1498#0" />
+            <element signature="e#1538#1770#0" />
+            <element signature="e#1825#2045#0" />
+            <element signature="e#2087#2168#0" />
+            <element signature="e#2209#2436#0" />
+            <element signature="e#2478#2657#0" />
+            <element signature="e#2694#2874#0" />
+            <element signature="e#2950#3219#0" />
+            <element signature="e#3263#3571#0" />
+            <element signature="e#3602#4418#0" />
+            <element signature="e#4460#4765#0" />
+            <element signature="e#4804#4969#0" />
+            <element signature="e#5014#5344#0" />
           </folding>
         </state>
       </provider>
@@ -253,6 +417,21 @@
           <caret line="32" column="66" selection-start-line="32" selection-start-column="66" selection-end-line="32" selection-end-column="66" />
           <folding>
             <element signature="e#0#18#0" expanded="true" />
+            <element signature="e#228#996#0" />
+            <element signature="e#1033#1115#0" />
+            <element signature="e#1154#1498#0" />
+            <element signature="e#1538#1770#0" />
+            <element signature="e#1825#2045#0" />
+            <element signature="e#2087#2168#0" />
+            <element signature="e#2209#2436#0" />
+            <element signature="e#2478#2657#0" />
+            <element signature="e#2694#2874#0" />
+            <element signature="e#2950#3219#0" />
+            <element signature="e#3263#3571#0" />
+            <element signature="e#3602#4418#0" />
+            <element signature="e#4460#4765#0" />
+            <element signature="e#4804#4969#0" />
+            <element signature="e#5014#5344#0" />
           </folding>
         </state>
       </provider>
@@ -266,33 +445,91 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/deep_q_network.py">
+    <entry file="file://$PROJECT_DIR$/env.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="266">
-          <caret line="112" column="13" selection-start-line="112" selection-start-column="13" selection-end-line="112" selection-end-column="13" />
+        <state relative-caret-position="-3630">
+          <caret line="2" column="14" selection-start-line="2" selection-start-column="14" selection-end-line="2" selection-end-column="14" />
           <folding>
             <element signature="e#0#18#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/deep_q_network.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="220">
+          <caret line="44" column="77" selection-end-line="116" selection-end-column="128" />
+          <folding>
+            <element signature="e#0#18#0" expanded="true" />
+            <element signature="e#228#996#0" />
+            <element signature="e#1033#1115#0" />
+            <element signature="e#1154#1498#0" />
+            <element signature="e#1538#1770#0" />
+            <element signature="e#1825#2045#0" />
+            <element signature="e#2087#2168#0" />
+            <element signature="e#2209#2436#0" />
+            <element signature="e#2478#2657#0" />
+            <element signature="e#2694#2874#0" />
+            <element signature="e#2950#3219#0" />
+            <element signature="e#3263#3571#0" />
+            <element signature="e#3602#4418#0" />
+            <element signature="e#4460#4765#0" />
+            <element signature="e#4804#4969#0" />
+            <element signature="e#5014#5344#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/meta_controller_dqn.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="222">
+          <caret line="96" column="10" selection-start-line="96" selection-start-column="10" selection-end-line="96" selection-end-column="10" />
+          <folding>
+            <element signature="e#0#18#0" expanded="true" />
+            <element signature="e#228#996#0" />
+            <element signature="e#1033#1115#0" />
+            <element signature="e#1538#1770#0" />
+            <element signature="e#1824#2044#0" />
+            <element signature="e#2086#2167#0" />
+            <element signature="e#2208#2435#0" />
+            <element signature="e#2477#2656#0" />
+            <element signature="e#2693#2873#0" />
+            <element signature="e#3262#3570#0" />
+            <element signature="e#4459#4764#0" />
+            <element signature="e#4803#4968#0" />
+            <element signature="e#5013#5343#0" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/main.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-277">
-          <caret line="12" column="18" lean-forward="true" selection-start-line="12" selection-start-column="18" selection-end-line="12" selection-end-column="18" />
+        <state relative-caret-position="322">
+          <caret line="26" column="39" lean-forward="true" selection-start-line="26" selection-start-column="39" selection-end-line="26" selection-end-column="39" />
           <folding>
             <element signature="e#0#23#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/env.py">
+    <entry file="file://$PROJECT_DIR$/controller_dqn.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="237">
-          <caret line="88" lean-forward="true" selection-start-line="88" selection-end-line="88" />
+        <state relative-caret-position="447">
+          <caret line="71" column="49" selection-start-line="71" selection-start-column="49" selection-end-line="71" selection-end-column="49" />
           <folding>
             <element signature="e#0#18#0" expanded="true" />
-            <element signature="e#2119#2270#0" />
+            <element signature="e#1033#1115#0" />
+            <element signature="e#1538#1770#0" />
+            <element signature="e#1824#2044#0" />
+            <element signature="e#2086#2167#0" />
+            <element signature="e#2208#2435#0" />
+            <element signature="e#2477#2656#0" />
+            <element signature="e#2693#2873#0" />
+            <element signature="e#3262#3570#0" />
+            <element signature="e#3601#4417#0" />
+            <element signature="e#4459#4764#0" />
+            <element signature="e#4803#4968#0" />
+            <element signature="e#5013#5347#0" />
           </folding>
         </state>
       </provider>
