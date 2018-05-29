@@ -14,11 +14,9 @@ class dqn:
 
         self.discount_factor = discount_factor
 
-        # State and Next_state have num_features of dims
-        # Action, Reward, and Terminal have 1
-        self.experience_buffer = np.zeros((self.memory_capacity, self.num_features * 2 + 3))
+        self.experience_buffer = np.zeros((self.memory_capacity, self.num_features * 2 + 5))
 
-        self.current_time_step = 0
+        self.current_time_step = 1
         self.train_iteration = 0
 
         self.init_graphs()
@@ -32,17 +30,17 @@ class dqn:
         self.update_beginning()
 
     def define_inputs(self):
-        self.input_state = tf.placeholder(tf.float32, [None, self.num_features * 2]) #last num of features represents goal
-        self.input_state_next = tf.placeholder(tf.float32, [None, self.num_features * 2])
-        self.input_reward = tf.placeholder(tf.float32, [None, ])
+        self.input_state_goal = tf.placeholder(tf.float32, [None, self.num_features + 1]) #last num of features represents goal
         self.input_action = tf.placeholder(tf.int32, [None, ])
+        self.input_reward = tf.placeholder(tf.float32, [None, ])
+        self.input_state_goal_next = tf.placeholder(tf.float32, [None, self.num_features + 1])
         self.terminal = tf.placeholder(tf.bool, [None, ])
 
     def build_networks(self):
-        with tf.variable_scope("q_network"):
-            self.q_network = self.build_q_network(self.input_state)
-        with tf.variable_scope("target_network"):
-            self.target_network = self.build_q_network(self.input_state_next)
+        with tf.variable_scope("q_network_controller"):
+            self.q_network = self.build_q_network(self.input_state_goal)
+        with tf.variable_scope("target_network_controller"):
+            self.target_network = self.build_q_network(self.input_state_goal_next)
 
     def build_q_network(self, input_state):
         layer_fc1 = tf.contrib.layers.fully_connected(input_state, 64, activation_fn = tf.nn.relu)
@@ -66,21 +64,20 @@ class dqn:
         self.loss = tf.reduce_mean(tf.squared_difference(self.q_target, self.q_value_for_action))
         self.optimizer = tf.train.RMSPropOptimizer(self.learning_rate).minimize(self.loss)
 
-    def store(self, state, action, reward, next_state, terminal):
+    def store(self, state, goal, action, reward, next_state, terminal):
         index = self.current_time_step % self.memory_capacity
-        #TODO: ENTRY POINT: Adjust the storing based on the inputs, where goal was added.
-        #TODO: But verify it first in the paper. 
-        experience = [state[0], state[1], state[0], state[1], action, reward, next_state[0], next_state[1], terminal] #TODO: Not n_feature dynamic!
-
+        experience = [state[0], state[1], goal, action, reward,
+                      next_state[0], next_state[1], goal, terminal] #TODO: Not n_feature dynamic!
         self.experience_buffer[index] = experience
         self.current_time_step += 1
 
-    def pick_action(self, state):
-        state = state[None, :]
+    def pick_action(self, state, goal):
+        state_goal = np.append(state, goal)
+        state_goal = state_goal[None, :]
         if (np.random.uniform() < self.epsilon):
             action = np.random.randint(0, self.num_actions)
         else:
-            action_vals = self.session.run(self.q_network, feed_dict={self.input_state : state})
+            action_vals = self.session.run(self.q_network, feed_dict={self.input_state_goal : state_goal})
             action = np.argmax(action_vals)
         return action
 
@@ -90,10 +87,10 @@ class dqn:
 
         batch = self.get_random_batch()
 
-        _, __ = self.session.run([self.optimizer, self.loss], feed_dict={self.input_state : batch[:, :self.num_features],
-                                                                         self.input_action : batch[:, self.num_features],
-                                                                         self.input_reward : batch[:, self.num_features + 1],
-                                                                         self.input_state_next : batch[:, self.num_features + 2 : -1],
+        _, __ = self.session.run([self.optimizer, self.loss], feed_dict={self.input_state_goal : batch[:, :self.num_features + 1],
+                                                                         self.input_action : batch[:, self.num_features + 1],
+                                                                         self.input_reward : batch[:, self.num_features + 2],
+                                                                         self.input_state_goal_next : batch[:, self.num_features + 3 : -1],
                                                                          self.terminal : batch[:, -1]})
 
         self.train_iteration += 1
@@ -114,6 +111,6 @@ class dqn:
                 #print("Epsilon: ", self.epsilon)
 
     def reset_target_params(self):
-        self.q_network_params = tf.get_collection(tf.GraphKeys.GLOBAL_VARIABLES, scope="q_network")
-        self.target_network_params = tf.get_collection(tf.GraphKeys.GLOBAL_VARIABLES, scope="target_network")
+        self.q_network_params = tf.get_collection(tf.GraphKeys.GLOBAL_VARIABLES, scope="q_network_controller")
+        self.target_network_params = tf.get_collection(tf.GraphKeys.GLOBAL_VARIABLES, scope="target_network_controller")
         self.session.run([tf.assign(target, q_net) for target, q_net in zip(self.target_network_params, self.q_network_params)])

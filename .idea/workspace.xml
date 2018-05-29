@@ -2,12 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="027c33ca-90cc-400a-8b03-12b521dc8322" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/controller_dqn.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/meta_controller_dqn.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/deep_q_network.py" beforeDir="false" afterPath="$PROJECT_DIR$/deep_q_network.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/controller_dqn.py" beforeDir="false" afterPath="$PROJECT_DIR$/controller_dqn.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/env.py" beforeDir="false" afterPath="$PROJECT_DIR$/env.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/meta_controller_dqn.py" beforeDir="false" afterPath="$PROJECT_DIR$/meta_controller_dqn.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -18,11 +17,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="main.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="main.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/main.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="322">
-              <caret line="26" column="39" lean-forward="true" selection-start-line="26" selection-start-column="39" selection-end-line="26" selection-end-column="39" />
+            <state relative-caret-position="275">
+              <caret line="44" column="64" selection-start-line="44" selection-start-column="64" selection-end-line="44" selection-end-column="64" />
               <folding>
                 <element signature="e#0#23#0" expanded="true" />
               </folding>
@@ -33,46 +32,22 @@
       <file leaf-file-name="meta_controller_dqn.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/meta_controller_dqn.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="222">
-              <caret line="96" column="10" selection-start-line="96" selection-start-column="10" selection-end-line="96" selection-end-column="10" />
+            <state relative-caret-position="-67">
+              <caret line="110" column="127" selection-start-line="110" selection-start-column="127" selection-end-line="110" selection-end-column="127" />
               <folding>
                 <element signature="e#0#18#0" expanded="true" />
-                <element signature="e#228#996#0" />
-                <element signature="e#1033#1115#0" />
-                <element signature="e#1538#1770#0" />
-                <element signature="e#1824#2044#0" />
-                <element signature="e#2086#2167#0" />
-                <element signature="e#2208#2435#0" />
-                <element signature="e#2477#2656#0" />
-                <element signature="e#2693#2873#0" />
-                <element signature="e#3262#3570#0" />
-                <element signature="e#4459#4764#0" />
-                <element signature="e#4803#4968#0" />
-                <element signature="e#5013#5343#0" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="controller_dqn.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="controller_dqn.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/controller_dqn.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="447">
-              <caret line="71" column="49" selection-start-line="71" selection-start-column="49" selection-end-line="71" selection-end-column="49" />
+            <state relative-caret-position="681">
+              <caret line="92" column="90" lean-forward="true" selection-start-line="92" selection-start-column="90" selection-end-line="92" selection-end-column="90" />
               <folding>
                 <element signature="e#0#18#0" expanded="true" />
-                <element signature="e#1033#1115#0" />
-                <element signature="e#1538#1770#0" />
-                <element signature="e#1824#2044#0" />
-                <element signature="e#2086#2167#0" />
-                <element signature="e#2208#2435#0" />
-                <element signature="e#2477#2656#0" />
-                <element signature="e#2693#2873#0" />
-                <element signature="e#3262#3570#0" />
-                <element signature="e#3601#4417#0" />
-                <element signature="e#4459#4764#0" />
-                <element signature="e#4803#4968#0" />
-                <element signature="e#5013#5347#0" />
               </folding>
             </state>
           </provider>
@@ -81,8 +56,8 @@
       <file leaf-file-name="env.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/env.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-3630">
-              <caret line="2" column="14" selection-start-line="2" selection-start-column="14" selection-end-line="2" selection-end-column="14" />
+            <state relative-caret-position="151">
+              <caret line="81" column="21" lean-forward="true" selection-start-line="81" selection-start-column="21" selection-end-line="81" selection-end-column="21" />
               <folding>
                 <element signature="e#0#18#0" expanded="true" />
               </folding>
@@ -108,6 +83,11 @@
       <find>todo</find>
       <find>input_state_next</find>
       <find>terminal</find>
+      <find>feature_shape</find>
+      <find>&quot;q_network</find>
+      <find>q_value_for_goal</find>
+      <find>goals_shape</find>
+      <find>print</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -117,12 +97,13 @@
     <option name="CHANGED_PATHS">
       <list>
         <option value="$PROJECT_DIR$/dqn.py" />
-        <option value="$PROJECT_DIR$/env.py" />
         <option value="$PROJECT_DIR$/deep_q_network.py" />
         <option value="$PROJECT_DIR$/controller.py" />
         <option value="$PROJECT_DIR$/meta_controller.py" />
-        <option value="$PROJECT_DIR$/main.py" />
+        <option value="$PROJECT_DIR$/meta_controller_dqn.py" />
         <option value="$PROJECT_DIR$/controller_dqn.py" />
+        <option value="$PROJECT_DIR$/env.py" />
+        <option value="$PROJECT_DIR$/main.py" />
       </list>
     </option>
   </component>
@@ -210,12 +191,10 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
-    <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.0" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.0" />
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Event Log" order="7" side_tool="true" />
-      <window_info anchor="bottom" id="Find" order="1" weight="0.32965517" />
       <window_info anchor="bottom" id="Version Control" order="7" />
       <window_info anchor="bottom" id="Python Console" order="7" />
       <window_info anchor="bottom" id="Run" order="2" weight="0.3613793" />
@@ -229,6 +208,7 @@
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="bottom" id="Find" order="1" weight="0.32965517" />
     </layout>
   </component>
   <component name="VcsContentAnnotationSettings">
@@ -236,10 +216,90 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <option name="time" value="5" />
+      <option name="time" value="7" />
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/main.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="374">
+          <caret line="26" column="30" lean-forward="true" selection-start-line="26" selection-start-column="30" selection-end-line="26" selection-end-column="30" />
+          <folding>
+            <element signature="e#0#23#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/controller_dqn.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1139">
+          <caret line="68" column="63" selection-start-line="68" selection-start-column="63" selection-end-line="68" selection-end-column="63" />
+          <folding>
+            <element signature="e#0#18#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/env.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="102">
+          <caret line="8" column="13" selection-start-line="8" selection-start-column="13" selection-end-line="8" selection-end-column="13" />
+          <folding>
+            <element signature="e#0#18#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/meta_controller_dqn.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1037">
+          <caret line="62" column="45" lean-forward="true" selection-start-line="62" selection-start-column="45" selection-end-line="62" selection-end-column="45" />
+          <folding>
+            <element signature="e#0#18#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/main.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="374">
+          <caret line="26" column="39" lean-forward="true" selection-start-line="26" selection-start-column="39" selection-end-line="26" selection-end-column="39" />
+          <folding>
+            <element signature="e#0#23#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/meta_controller_dqn.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1207">
+          <caret line="96" column="10" selection-start-line="96" selection-start-column="10" selection-end-line="96" selection-end-column="10" />
+          <folding>
+            <element signature="e#0#18#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/env.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="34">
+          <caret line="2" column="14" selection-start-line="2" selection-start-column="14" selection-end-line="2" selection-end-column="14" />
+          <folding>
+            <element signature="e#0#18#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/controller_dqn.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1156">
+          <caret line="71" column="49" selection-start-line="71" selection-start-column="49" selection-end-line="71" selection-end-column="49" />
+          <folding>
+            <element signature="e#0#18#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/main.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="153">
@@ -445,16 +505,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/env.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-3630">
-          <caret line="2" column="14" selection-start-line="2" selection-start-column="14" selection-end-line="2" selection-end-column="14" />
-          <folding>
-            <element signature="e#0#18#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/deep_q_network.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="220">
@@ -480,56 +530,42 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/meta_controller_dqn.py">
+    <entry file="file://$PROJECT_DIR$/controller_dqn.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="222">
-          <caret line="96" column="10" selection-start-line="96" selection-start-column="10" selection-end-line="96" selection-end-column="10" />
+        <state relative-caret-position="681">
+          <caret line="92" column="90" lean-forward="true" selection-start-line="92" selection-start-column="90" selection-end-line="92" selection-end-column="90" />
           <folding>
             <element signature="e#0#18#0" expanded="true" />
-            <element signature="e#228#996#0" />
-            <element signature="e#1033#1115#0" />
-            <element signature="e#1538#1770#0" />
-            <element signature="e#1824#2044#0" />
-            <element signature="e#2086#2167#0" />
-            <element signature="e#2208#2435#0" />
-            <element signature="e#2477#2656#0" />
-            <element signature="e#2693#2873#0" />
-            <element signature="e#3262#3570#0" />
-            <element signature="e#4459#4764#0" />
-            <element signature="e#4803#4968#0" />
-            <element signature="e#5013#5343#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/meta_controller_dqn.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-67">
+          <caret line="110" column="127" selection-start-line="110" selection-start-column="127" selection-end-line="110" selection-end-column="127" />
+          <folding>
+            <element signature="e#0#18#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/env.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="151">
+          <caret line="81" column="21" lean-forward="true" selection-start-line="81" selection-start-column="21" selection-end-line="81" selection-end-column="21" />
+          <folding>
+            <element signature="e#0#18#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/main.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="322">
-          <caret line="26" column="39" lean-forward="true" selection-start-line="26" selection-start-column="39" selection-end-line="26" selection-end-column="39" />
+        <state relative-caret-position="275">
+          <caret line="44" column="64" selection-start-line="44" selection-start-column="64" selection-end-line="44" selection-end-column="64" />
           <folding>
             <element signature="e#0#23#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/controller_dqn.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="447">
-          <caret line="71" column="49" selection-start-line="71" selection-start-column="49" selection-end-line="71" selection-end-column="49" />
-          <folding>
-            <element signature="e#0#18#0" expanded="true" />
-            <element signature="e#1033#1115#0" />
-            <element signature="e#1538#1770#0" />
-            <element signature="e#1824#2044#0" />
-            <element signature="e#2086#2167#0" />
-            <element signature="e#2208#2435#0" />
-            <element signature="e#2477#2656#0" />
-            <element signature="e#2693#2873#0" />
-            <element signature="e#3262#3570#0" />
-            <element signature="e#3601#4417#0" />
-            <element signature="e#4459#4764#0" />
-            <element signature="e#4803#4968#0" />
-            <element signature="e#5013#5347#0" />
           </folding>
         </state>
       </provider>
