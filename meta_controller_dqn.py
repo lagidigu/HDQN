@@ -1,5 +1,6 @@
 import numpy as np
 import tensorflow as tf
+import pickle
 
 class dqn:
     def __init__(self, objects, num_features, memory_capacity, target_replacement_rate, batch_size, epsilon, decay_rate, learning_rate, discount_factor = 0.99):
@@ -23,20 +24,27 @@ class dqn:
         self.target_replacement_rate = target_replacement_rate
         self.batch_size = batch_size
         self.epsilon = epsilon
+        self.epsilon_logger = 0
         self.decay_rate = decay_rate
         self.learning_rate = learning_rate
 
         self.discount_factor = discount_factor
 
-        self.experience_buffer = np.zeros((self.memory_capacity, self.num_features * 2 + 3))
+        try:
+            self.experience_buffer = pickle.load(open("meta_controller_experience_buffer.p", "rb"))
+            self.current_time_step = pickle.load(open("meta_current_time_step.p", "rb"))
+        except (OSError, IOError) as e:
+            self.experience_buffer = np.zeros((self.memory_capacity, self.num_features * 2 + 3))
+            self.current_time_step = 1
 
-        self.current_time_step = 1
         self.train_iteration = 0
 
         self.init_graphs()
 
         self.session = tf.Session()
         self.session.run(tf.global_variables_initializer())
+
+        self.saver = tf.train.Saver()
 
 
     def init_graphs(self):
@@ -85,6 +93,11 @@ class dqn:
         experience = [state[0], state[1], goal, extrinsic_reward, next_state[0], next_state[1], terminal] #TODO: Not n_feature dynamic!
         self.experience_buffer[index] = experience
         self.current_time_step += 1
+        if (self.current_time_step % 25000 == 0):
+            pickle.dump(self.experience_buffer, open("meta_controller_experience_buffer.p", "wb"))
+            pickle.dump(self.current_time_step, open("meta_current_time_step.p", "wb"))
+            print("Meta-Controller Experience Buffer Saved, current time step is", self.current_time_step)
+
 
     def pick_goal(self, state):
         if (np.random.uniform() < self.epsilon):
@@ -109,10 +122,10 @@ class dqn:
                                                                          self.input_goal : batch[: , self.num_features],
                                                                          self.input_extrinsic_reward : batch[:, self.num_features + 1],
                                                                          self.input_state_next : batch[:, self.num_features + 2 : -1],
-                                                                         self.terminal : batch[:, -1]}) #TODO: If this doesn't work, check that slicing is correct or make a static case
+                                                                         self.terminal : batch[:, -1]})
 
         self.train_iteration += 1
-        self.decay_epsilon() #TODO: Decay based on the average success rate of reaching goal g?
+        #self.decay_epsilon() #TODO: Decay based on the average success rate of reaching goal g?
 
     # TODO: Generalize? Paper hasnt done that yet.
     def goal_reached(self, observation, goal):
@@ -122,6 +135,8 @@ class dqn:
         if (np.array(comparison).all()):
             reached = True
             intrinsic_reward = 1 #TODO: You could base the intrinsic reward on the distance
+        else:
+            intrinsic_reward = -1
         return reached, intrinsic_reward
 
     def get_random_batch(self):
@@ -132,13 +147,22 @@ class dqn:
         batch = self.experience_buffer[indeces, :]
         return batch
 
-    def decay_epsilon(self):
-        if (self.epsilon > 0.1):
-            self.epsilon -= self.decay_rate
-            #if (str(self.epsilon)[3] == "0"):
-                #print("Epsilon: ", self.epsilon)
+    def decay_epsilon(self, rate):
+        if (self.epsilon > 0.01):
+            self.epsilon -= self.decay_rate * rate
+            self.epsilon_logger += 1
+            if (self.epsilon_logger % 1000 == 0):
+                print("Epsilon Value : ", self.epsilon)
 
     def reset_target_params(self):
         self.q_network_params = tf.get_collection(tf.GraphKeys.GLOBAL_VARIABLES, scope="q_network_meta_controller")
         self.target_network_params = tf.get_collection(tf.GraphKeys.GLOBAL_VARIABLES, scope="target_network_meta_controller")
         self.session.run([tf.assign(target, q_net) for target, q_net in zip(self.target_network_params, self.q_network_params)])
+
+    def save(self):
+        self.save_path = self.saver.save(self.session, "tmp/hdqn.ckpt")
+        print("Meta Model Saved.")
+
+    def load(self):
+        self.saver.restore(self.session, "tmp/hdqn.ckpt")
+        print("Meta Model Restored.")

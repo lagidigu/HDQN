@@ -1,28 +1,37 @@
 import numpy as np
 import tensorflow as tf
+import pickle
 
 class dqn:
-    def __init__(self, num_actions, num_features, memory_capacity, target_replacement_rate, batch_size, epsilon, decay_rate, learning_rate, discount_factor = 0.99):
+    def __init__(self, num_actions, num_features, num_goals, memory_capacity, target_replacement_rate, batch_size, epsilons, decay_rate, learning_rate, discount_factor = 0.99):
         self.num_actions = num_actions
         self.num_features = num_features
         self.memory_capacity = memory_capacity
         self.target_replacement_rate = target_replacement_rate
         self.batch_size = batch_size
-        self.epsilon = epsilon
+        self.epsilons = np.ones(num_goals)
         self.decay_rate = decay_rate
         self.learning_rate = learning_rate
 
         self.discount_factor = discount_factor
 
-        self.experience_buffer = np.zeros((self.memory_capacity, self.num_features * 2 + 5))
 
-        self.current_time_step = 1
+        try:
+            self.experience_buffer = pickle.load(open("controller_experience_buffer.p", "rb"))
+            self.current_time_step = pickle.load(open("current_time_step.p", "rb"))
+        except (OSError, IOError) as e:
+            self.experience_buffer = np.zeros((self.memory_capacity, self.num_features * 2 + 5))
+            self.current_time_step = 1
+
+
         self.train_iteration = 0
-
+        self.epsilon_logger = 0
         self.init_graphs()
 
         self.session = tf.Session()
         self.session.run(tf.global_variables_initializer())
+
+        self.saver = tf.train.Saver()
 
     def init_graphs(self):
         self.define_inputs()
@@ -70,11 +79,15 @@ class dqn:
                       next_state[0], next_state[1], goal, terminal] #TODO: Not n_feature dynamic!
         self.experience_buffer[index] = experience
         self.current_time_step += 1
+        if (self.current_time_step % 25000 == 0):
+            pickle.dump(self.experience_buffer, open("controller_experience_buffer.p", "wb"))
+            pickle.dump(self.current_time_step, open("current_time_step.p", "wb"))
+            print("Controller Experience Buffer Saved, current time step is", self.current_time_step)
 
     def pick_action(self, state, goal):
         state_goal = np.append(state, goal)
         state_goal = state_goal[None, :]
-        if (np.random.uniform() < self.epsilon):
+        if (np.random.uniform() < self.epsilons[goal]):
             action = np.random.randint(0, self.num_actions)
         else:
             action_vals = self.session.run(self.q_network, feed_dict={self.input_state_goal : state_goal})
@@ -94,7 +107,7 @@ class dqn:
                                                                          self.terminal : batch[:, -1]})
 
         self.train_iteration += 1
-        self.decay_epsilon()
+        #self.decay_epsilon()
 
     def get_random_batch(self):
         if (self.current_time_step > self.memory_capacity):
@@ -104,13 +117,27 @@ class dqn:
         batch = self.experience_buffer[indeces, :]
         return batch
 
-    def decay_epsilon(self):
-        if (self.epsilon > 0.1):
-            self.epsilon -= self.decay_rate
-            #if (str(self.epsilon)[3] == "0"):
-                #print("Epsilon: ", self.epsilon)
+    def decay_epsilon(self, rate, current_epoch):
+        for i in range (0, len(self.epsilons)):
+            if (self.epsilons[i] > 0.01):
+                self.epsilons[i] -= self.decay_rate #* rate[i][current_epoch]
+                #self.epsilons[i] = 1 - rate[i][current_epoch]
+        self.epsilon_logger += 1
+        if (self.epsilon_logger % 1000 == 0):
+            print("Epsilon Values : ", end="")
+            for epsilon in self.epsilons:
+                print(epsilon, ", ")
+            print(" ")
 
     def reset_target_params(self):
         self.q_network_params = tf.get_collection(tf.GraphKeys.GLOBAL_VARIABLES, scope="q_network_controller")
         self.target_network_params = tf.get_collection(tf.GraphKeys.GLOBAL_VARIABLES, scope="target_network_controller")
         self.session.run([tf.assign(target, q_net) for target, q_net in zip(self.target_network_params, self.q_network_params)])
+
+    def save(self):
+        self.save_path = self.saver.save(self.session, "tmp/hdqn.ckpt")
+        print("Controller Model Saved.")
+
+    def load(self):
+        self.saver.restore(self.session, "tmp/hdqn.ckpt")
+        print("Controller Model Restored.")

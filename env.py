@@ -1,9 +1,12 @@
 import numpy as np
 import random
 import tkinter
+from log_tracker import log_tracker
+from log_tracker import Outcome
 
 class Env:
-    def __init__(self, size, num_obstacles, use_key=False):
+    def __init__(self, size, num_obstacles, logger, use_key=False):
+        self.logger = logger
         self.num_actions = 4
         self.num_features = 2
         self.size = size
@@ -12,7 +15,7 @@ class Env:
         self.key_picked_up = False
 
         self.objects = []
-
+        self.obstacles = []
         self.illegal_positions = []
 
         if (self.use_key):
@@ -26,28 +29,24 @@ class Env:
 
         self.log = ""
 
+        self.logger.create_goal_array(len(self.objects))
         self.init_canvas()
         self.draw_terrain()
 
-
-    def determine_objects(self):
-        self.objects = []
-        self.objects.append(self.key_pos)
-        self.objects.append(self.goal_pos)
-        self.objects.append(self.obstacles)
 
     def generate_fixed_with_key(self):
         self.key_pos = [self.size-1, self.size-1]
         self.goal_pos = [0,1]
         self.illegal_positions.append(self.key_pos)
         self.illegal_positions.append(self.goal_pos)
+        self.objects.append(self.key_pos)
+        self.objects.append(self.goal_pos)
 
     def generate_obstacles(self):
-        self.obstacles = []
         for i in range (0, self.num_obstacles):
             self.death_pos = self.generate_legal_pos()
-            self.obstacles.append(self.death_pos)
             self.objects.append(self.death_pos)
+            self.obstacles.append(self.death_pos)
 
     def restart(self):
         self.canvas.delete("all")
@@ -117,19 +116,20 @@ class Env:
             if (self.key_picked_up == False):
                 if self.player_pos[0] == self.key_pos[0] and self.player_pos[1] == self.key_pos[1]:
                     self.key_picked_up = True
-                    print("Key Picked Up...")
             else:
                 if self.player_pos[0] == self.goal_pos[0] and self.player_pos[1] == self.goal_pos[1]:
-                    print("Success!")
+                    self.logger.log_outcome(Outcome.SUCCESS)
                     reward += 10
         else:
             if self.player_pos[0] == self.goal_pos[0] and self.player_pos[1] == self.goal_pos[1]:
-                print("Success!")
                 reward += 1
-
-        if self.player_pos[0] == self.death_pos[0] and self.player_pos[1] == self.death_pos[1]:
-            print("Failed")
-            reward += - 1
+        for entry in self.objects:
+            if self.player_pos[0] == entry[0] and self.player_pos[1] == entry[1]:
+                if (self.key_picked_up):
+                    self.logger.log_outcome(Outcome.PICKED_UP)
+                else:
+                    self.logger.log_outcome(Outcome.FAILED)
+                reward += - 1
         return reward
 
     def give_terminal(self):
@@ -141,8 +141,9 @@ class Env:
             if (self.key_picked_up):
                 if (self.player_pos[0] == self.goal_pos[0] and self.player_pos[1] == self.goal_pos[1]):
                     terminal = True
-        if (self.player_pos[0] == self.death_pos[0] and self.player_pos[1] == self.death_pos[1]):
-            terminal = True
+        for entry in self.obstacles:
+            if (self.player_pos[0] == entry[0] and self.player_pos[1] == entry[1]):
+                terminal = True
         return terminal
 
     def move_player(self, x, y):
