@@ -16,13 +16,13 @@ import log_tracker
 #https://arxiv.org/pdf/1804.03758.pdf                                                                                   Transfer learning in the context of HDQN
 #http://papers.nips.cc/paper/6413-strategic-attentive-writer-for-learning-macro-actions                                 Bridge to planning
 
-#TODO: Train the network in 2 phases. 1: Let epsilon be 1 without decay for meta-controller. 2. Train jointly.
-
 #TODO: Log Cumulative extrinsic reward for the joint phase.
 
-#TODO: Read/Skim the papers listed above
+#TODO: Create an expert class with all the functions given (labelfull, inspectfull, etc.)
+#TODO: 
 
-iterations = 150000
+
+iterations = 200000
 
 log_tracker = log_tracker.log_tracker(num_iterations=iterations)
 
@@ -31,10 +31,10 @@ observation = environment.give_observations()
 
 meta_controller = meta_controller_dqn.dqn(environment.objects, num_features=environment.num_features,
                                           memory_capacity=50000, target_replacement_rate=1000, epsilon=1,
-                                          batch_size=32, decay_rate=1/iterations, learning_rate=0.00025)
+                                          batch_size=32, decay_rate=1/50000, learning_rate=0.00025)
 
 controller = controller_dqn.dqn(environment.num_actions, environment.num_features, num_goals=len(environment.objects), memory_capacity=1000000,
-                                target_replacement_rate=1000, epsilons=1, batch_size=32, decay_rate=1/iterations,
+                                target_replacement_rate=1000, epsilons=1, batch_size=32, decay_rate=1/150000,
                                 learning_rate=0.00025)
 
 k = 4
@@ -49,9 +49,8 @@ for episode in range(0, iterations):
     goal_reached = False
     goal = meta_controller.pick_goal(observation)
 
-    if episode % 100 == 0:
-        if episode % 1000 == 0:
-            environment.logger.print_logs(episode=episode)
+    if episode % 1000 == 0:
+        environment.logger.print_logs(episode=episode)
         print("Current Episode: ", episode)
         meta_controller.save()
         controller.save()
@@ -86,7 +85,8 @@ for episode in range(0, iterations):
 
         step += 1
 
-    #meta_controller.decay_epsilon(1)
+    if (episode > 150000):
+        meta_controller.decay_epsilon(1)
     controller.decay_epsilon(environment.logger.goal_reached_rate, environment.logger.current_epoch)
 
 

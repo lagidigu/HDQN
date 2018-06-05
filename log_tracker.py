@@ -100,9 +100,9 @@ class log_tracker:
         return goal_distribution
 
     def convert_success_to_percentages(self):
-        self.num_failed_percentage = self.num_failed / self.epoch_length * 100
-        self.num_picked_up_percentage = self.num_picked_up / self.epoch_length * 100
-        self.num_success_percentage = self.num_success / self.epoch_length * 100
+        self.num_failed_percentage = self.num_failed / (self.num_failed + self.num_picked_up + self.num_success) * 100
+        self.num_picked_up_percentage = self.num_picked_up / (self.num_failed + self.num_picked_up + self.num_success) * 100
+        self.num_success_percentage = self.num_success / (self.num_failed + self.num_picked_up + self.num_success) * 100
 
 
 class Outcome(Enum):

@@ -43,10 +43,37 @@ class Env:
         self.objects.append(self.goal_pos)
 
     def generate_obstacles(self):
-        for i in range (0, self.num_obstacles):
-            self.death_pos = self.generate_legal_pos()
-            self.objects.append(self.death_pos)
-            self.obstacles.append(self.death_pos)
+        self.death_pos = [1, 3]
+        self.objects.append(self.death_pos)
+        self.obstacles.append(self.death_pos)
+        self.death_pos = [5, 3]
+        self.objects.append(self.death_pos)
+        self.obstacles.append(self.death_pos)
+        self.death_pos = [1, 5]
+        self.objects.append(self.death_pos)
+        self.obstacles.append(self.death_pos)
+        self.death_pos = [2, 6]
+        self.objects.append(self.death_pos)
+        self.obstacles.append(self.death_pos)
+        self.death_pos = [2, 6]
+        self.objects.append(self.death_pos)
+        self.obstacles.append(self.death_pos)
+        self.death_pos = [3, 3]
+        self.objects.append(self.death_pos)
+        self.obstacles.append(self.death_pos)
+        self.death_pos = [8, 3]
+        self.objects.append(self.death_pos)
+        self.obstacles.append(self.death_pos)
+        self.death_pos = [8, 7]
+        self.objects.append(self.death_pos)
+        self.obstacles.append(self.death_pos)
+        self.death_pos = [5, 3]
+        self.objects.append(self.death_pos)
+        self.obstacles.append(self.death_pos)
+        # for i in range (0, self.num_obstacles):
+        #     self.death_pos = self.generate_legal_pos()
+        #     self.death_pos = self.generate_legal_pos()
+        #     self.obstacles.append(self.death_pos)
 
     def restart(self):
         self.canvas.delete("all")

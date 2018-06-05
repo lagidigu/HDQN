@@ -2,12 +2,20 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="027c33ca-90cc-400a-8b03-12b521dc8322" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/log_tracker.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/controller_dqn.py" beforeDir="false" afterPath="$PROJECT_DIR$/controller_dqn.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/controller_experience_buffer.p" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/current_time_step.p" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/env.py" beforeDir="false" afterPath="$PROJECT_DIR$/env.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/log_tracker.py" beforeDir="false" afterPath="$PROJECT_DIR$/log_tracker.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/meta_controller_dqn.py" beforeDir="false" afterPath="$PROJECT_DIR$/meta_controller_dqn.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/meta_controller_experience_buffer.p" beforeDir="false" afterPath="$PROJECT_DIR$/meta_controller_experience_buffer.p" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/meta_current_time_step.p" beforeDir="false" afterPath="$PROJECT_DIR$/meta_current_time_step.p" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tmp/checkpoint" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tmp/hdqn.ckpt.data-00000-of-00001" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tmp/hdqn.ckpt.index" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tmp/hdqn.ckpt.meta" beforeDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -21,8 +29,8 @@
       <file leaf-file-name="main.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/main.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="357">
-              <caret line="20" column="59" selection-start-line="20" selection-start-column="59" selection-end-line="20" selection-end-column="59" />
+            <state relative-caret-position="176">
+              <caret line="20" column="88" selection-start-line="20" selection-start-column="88" selection-end-line="20" selection-end-column="88" />
               <folding>
                 <element signature="e#0#23#0" expanded="true" />
               </folding>
@@ -33,8 +41,8 @@
       <file leaf-file-name="meta_controller_dqn.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/meta_controller_dqn.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="209">
-              <caret line="67" column="9" selection-start-line="67" selection-start-column="5" selection-end-line="67" selection-end-column="9" />
+            <state relative-caret-position="782">
+              <caret line="46" selection-start-line="46" selection-end-line="46" />
               <folding>
                 <element signature="e#0#18#0" expanded="true" />
               </folding>
@@ -45,8 +53,8 @@
       <file leaf-file-name="controller_dqn.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/controller_dqn.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1829">
-              <caret line="78" column="73" selection-start-line="78" selection-start-column="69" selection-end-line="78" selection-end-column="73" />
+            <state relative-caret-position="-1621">
+              <caret line="15" column="46" selection-start-line="15" selection-start-column="46" selection-end-line="15" selection-end-column="46" />
               <folding>
                 <element signature="e#0#18#0" expanded="true" />
               </folding>
@@ -57,8 +65,8 @@
       <file leaf-file-name="env.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/env.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2346">
-              <caret line="142" column="35" selection-start-line="142" selection-start-column="35" selection-end-line="142" selection-end-column="35" />
+            <state relative-caret-position="969">
+              <caret line="61" column="43" selection-start-line="61" selection-start-column="43" selection-end-line="61" selection-end-column="43" />
               <folding>
                 <element signature="e#0#18#0" expanded="true" />
               </folding>
@@ -69,8 +77,8 @@
       <file leaf-file-name="log_tracker.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/log_tracker.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="690">
-              <caret line="26" column="8" selection-start-line="26" selection-start-column="8" selection-end-line="26" selection-end-column="8" />
+            <state relative-caret-position="765">
+              <caret line="47" column="50" selection-start-line="47" selection-start-column="50" selection-end-line="47" selection-end-column="50" />
               <folding>
                 <element signature="e#0#18#0" expanded="true" />
               </folding>
@@ -125,8 +133,8 @@
         <option value="$PROJECT_DIR$/controller.py" />
         <option value="$PROJECT_DIR$/meta_controller.py" />
         <option value="$PROJECT_DIR$/logging.py" />
-        <option value="$PROJECT_DIR$/env.py" />
         <option value="$PROJECT_DIR$/log_tracker.py" />
+        <option value="$PROJECT_DIR$/env.py" />
         <option value="$PROJECT_DIR$/meta_controller_dqn.py" />
         <option value="$PROJECT_DIR$/controller_dqn.py" />
         <option value="$PROJECT_DIR$/main.py" />
@@ -228,7 +236,7 @@
     <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.0" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.15069398" />
       <window_info anchor="bottom" id="TODO" order="6" weight="0.32905984" />
       <window_info anchor="bottom" id="Event Log" order="7" side_tool="true" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.32905984" />
@@ -668,30 +676,20 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/env.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2346">
-          <caret line="142" column="35" selection-start-line="142" selection-start-column="35" selection-end-line="142" selection-end-column="35" />
-          <folding>
-            <element signature="e#0#18#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/log_tracker.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="690">
-          <caret line="26" column="8" selection-start-line="26" selection-start-column="8" selection-end-line="26" selection-end-column="8" />
+        <state relative-caret-position="765">
+          <caret line="47" column="50" selection-start-line="47" selection-start-column="50" selection-end-line="47" selection-end-column="50" />
           <folding>
             <element signature="e#0#18#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/meta_controller_dqn.py">
+    <entry file="file://$PROJECT_DIR$/env.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="209">
-          <caret line="67" column="9" selection-start-line="67" selection-start-column="5" selection-end-line="67" selection-end-column="9" />
+        <state relative-caret-position="969">
+          <caret line="61" column="43" selection-start-line="61" selection-start-column="43" selection-end-line="61" selection-end-column="43" />
           <folding>
             <element signature="e#0#18#0" expanded="true" />
           </folding>
@@ -700,8 +698,18 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/controller_dqn.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1829">
-          <caret line="78" column="73" selection-start-line="78" selection-start-column="69" selection-end-line="78" selection-end-column="73" />
+        <state relative-caret-position="-1621">
+          <caret line="15" column="46" selection-start-line="15" selection-start-column="46" selection-end-line="15" selection-end-column="46" />
+          <folding>
+            <element signature="e#0#18#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/meta_controller_dqn.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="782">
+          <caret line="46" selection-start-line="46" selection-end-line="46" />
           <folding>
             <element signature="e#0#18#0" expanded="true" />
           </folding>
@@ -710,8 +718,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/main.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="357">
-          <caret line="20" column="59" selection-start-line="20" selection-start-column="59" selection-end-line="20" selection-end-column="59" />
+        <state relative-caret-position="176">
+          <caret line="20" column="88" selection-start-line="20" selection-start-column="88" selection-end-line="20" selection-end-column="88" />
           <folding>
             <element signature="e#0#23#0" expanded="true" />
           </folding>

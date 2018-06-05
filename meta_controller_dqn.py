@@ -67,7 +67,7 @@ class dqn:
 
     #TODO: Fine-Tune Neuron Amount.
     def build_q_network(self, input_state):
-        layer_fc1 = tf.contrib.layers.fully_connected(input_state, 64, activation_fn = tf.nn.relu)
+        layer_fc1 = tf.contrib.layers.fully_connected(input_state, 128, activation_fn = tf.nn.relu)
         layer_fc2 = tf.contrib.layers.fully_connected(layer_fc1, len(self.objects), activation_fn = None)
         return layer_fc2
 

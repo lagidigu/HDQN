@@ -52,7 +52,7 @@ class dqn:
             self.target_network = self.build_q_network(self.input_state_goal_next)
 
     def build_q_network(self, input_state):
-        layer_fc1 = tf.contrib.layers.fully_connected(input_state, 64, activation_fn = tf.nn.relu)
+        layer_fc1 = tf.contrib.layers.fully_connected(input_state, 128, activation_fn = tf.nn.relu)
         layer_fc2 = tf.contrib.layers.fully_connected(layer_fc1, self.num_actions, activation_fn = None)
         return layer_fc2
 
@@ -123,11 +123,11 @@ class dqn:
                 self.epsilons[i] -= self.decay_rate #* rate[i][current_epoch]
                 #self.epsilons[i] = 1 - rate[i][current_epoch]
         self.epsilon_logger += 1
-        if (self.epsilon_logger % 1000 == 0):
-            print("Epsilon Values : ", end="")
-            for epsilon in self.epsilons:
-                print(epsilon, ", ")
-            print(" ")
+        # if (self.epsilon_logger % 1000 == 0):
+        #     print("Epsilon Values : ", end="")
+        #     for epsilon in self.epsilons:
+        #         print(epsilon, ", ")
+        #     print(" ")
 
     def reset_target_params(self):
         self.q_network_params = tf.get_collection(tf.GraphKeys.GLOBAL_VARIABLES, scope="q_network_controller")
