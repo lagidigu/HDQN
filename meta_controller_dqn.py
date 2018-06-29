@@ -1,6 +1,8 @@
 import numpy as np
 import tensorflow as tf
 import pickle
+import itertools
+
 
 class dqn:
     def __init__(self, objects, num_features, memory_capacity, target_replacement_rate, batch_size, epsilon, decay_rate, learning_rate, discount_factor = 0.99):
@@ -29,23 +31,22 @@ class dqn:
         self.learning_rate = learning_rate
 
         self.discount_factor = discount_factor
+        self.train_iteration = 0
+        self.session = tf.Session()
+        self.init_graphs()
+        self.saver = tf.train.Saver()
 
         try:
             self.experience_buffer = pickle.load(open("meta_controller_experience_buffer.p", "rb"))
             self.current_time_step = pickle.load(open("meta_current_time_step.p", "rb"))
+            self.saver.restore(self.session, "tmp/hdqn-meta.ckpt")
+            self.epsilon = 0
+            print("Meta Model Restored.")
+            print("Meta Epsilon is 0.")
         except (OSError, IOError) as e:
-            self.experience_buffer = np.zeros((self.memory_capacity, self.num_features * 2 + 3))
+            self.experience_buffer = np.zeros((self.memory_capacity, self.num_features * 2 + 4))
             self.current_time_step = 1
-
-        self.train_iteration = 0
-
-        self.init_graphs()
-
-        self.session = tf.Session()
-        self.session.run(tf.global_variables_initializer())
-
-        self.saver = tf.train.Saver()
-
+            self.session.run(tf.global_variables_initializer())
 
     def init_graphs(self):
         self.define_inputs()
@@ -54,7 +55,7 @@ class dqn:
 
     def define_inputs(self):
         self.input_state = tf.placeholder(tf.float32, [None, self.num_features], name="meta_input_state")
-        self.input_goal = tf.placeholder(tf.int32, [None, ], name="meta_input_goal")
+        self.input_goal = tf.placeholder(tf.int32, [None, 2], name="meta_input_goal")
         self.input_extrinsic_reward = tf.placeholder(tf.float32, [None, ], name="meta_input_reward")
         self.input_state_next = tf.placeholder(tf.float32, [None, self.num_features], name="meta_input_state_next")
         self.terminal = tf.placeholder(tf.bool, [None, ], name="meta_input_terminal")
@@ -65,7 +66,6 @@ class dqn:
         with tf.variable_scope("target_network_meta_controller"):
             self.target_network = self.build_q_network(self.input_state_next)
 
-    #TODO: Fine-Tune Neuron Amount.
     def build_q_network(self, input_state):
         layer_fc1 = tf.contrib.layers.fully_connected(input_state, 128, activation_fn = tf.nn.relu)
         layer_fc2 = tf.contrib.layers.fully_connected(layer_fc1, len(self.objects), activation_fn = None)
@@ -88,9 +88,9 @@ class dqn:
         self.loss = tf.reduce_mean(tf.squared_difference(self.q_target, self.q_value_for_goal))
         self.optimizer = tf.train.RMSPropOptimizer(self.learning_rate).minimize(self.loss)
 
-    def store(self, state, goal, extrinsic_reward, next_state, terminal):
+    def store(self, state, goal_pos, extrinsic_reward, next_state, terminal):
         index = self.current_time_step % self.memory_capacity
-        experience = [state[0], state[1], goal, extrinsic_reward, next_state[0], next_state[1], terminal] #TODO: Not n_feature dynamic!
+        experience = list(itertools.chain(state, goal_pos, [extrinsic_reward], next_state, [terminal]))
         self.experience_buffer[index] = experience
         self.current_time_step += 1
         if (self.current_time_step % 25000 == 0):
@@ -98,19 +98,15 @@ class dqn:
             pickle.dump(self.current_time_step, open("meta_current_time_step.p", "wb"))
             print("Meta-Controller Experience Buffer Saved, current time step is", self.current_time_step)
 
-
-    def pick_goal(self, state):
+    def pick_goal(self, state, objects):
+        self.objects = objects
         if (np.random.uniform() < self.epsilon):
-            # goal = np.zeros(len(self.goals_shape), dtype=float)
-            # for i in self.goals_shape:
-            #     num = np.random.randint(0, i)
-            #     goal[self.goals_shape.index(i)] = num
             goal = np.random.randint(0, len(self.objects))
         else:
             state = state[None, :]
             goal_vals = self.session.run(self.q_network, feed_dict={self.input_state : state})
             goal = np.argmax(goal_vals)
-        return goal
+        return self.objects[goal], goal
 
     def train(self):
         if (self.train_iteration % self.target_replacement_rate == 0):
@@ -119,24 +115,23 @@ class dqn:
         batch = self.get_random_batch()
 
         _, __ = self.session.run([self.optimizer, self.loss], feed_dict={self.input_state : batch[:, :self.num_features],
-                                                                         self.input_goal : batch[: , self.num_features],
-                                                                         self.input_extrinsic_reward : batch[:, self.num_features + 1],
-                                                                         self.input_state_next : batch[:, self.num_features + 2 : -1],
+                                                                         self.input_goal : batch[: , self.num_features:self.num_features+2],
+                                                                         self.input_extrinsic_reward : batch[:, self.num_features + 2],
+                                                                         self.input_state_next : batch[:, self.num_features + 3 : -1],
                                                                          self.terminal : batch[:, -1]})
 
         self.train_iteration += 1
         #self.decay_epsilon() #TODO: Decay based on the average success rate of reaching goal g?
 
-    # TODO: Generalize? Paper hasnt done that yet.
     def goal_reached(self, observation, goal):
         reached = False
         intrinsic_reward = 0
-        comparison = observation == self.objects[goal]
+        comparison = (observation[0] == goal[0] and observation[1] == goal[1])
         if (np.array(comparison).all()):
             reached = True
-            intrinsic_reward = 1 #TODO: You could base the intrinsic reward on the distance
-        else:
-            intrinsic_reward = -1
+            intrinsic_reward = 1
+        #else:
+            #intrinsic_reward = -.05
         return reached, intrinsic_reward
 
     def get_random_batch(self):
@@ -148,10 +143,10 @@ class dqn:
         return batch
 
     def decay_epsilon(self, rate):
-        if (self.epsilon > 0.01):
+        if (self.epsilon > 0.2):
             self.epsilon -= self.decay_rate * rate
             self.epsilon_logger += 1
-            if (self.epsilon_logger % 1000 == 0):
+            if (self.epsilon_logger % 10 == 0):
                 print("Epsilon Value : ", self.epsilon)
 
     def reset_target_params(self):
@@ -160,9 +155,7 @@ class dqn:
         self.session.run([tf.assign(target, q_net) for target, q_net in zip(self.target_network_params, self.q_network_params)])
 
     def save(self):
-        self.save_path = self.saver.save(self.session, "tmp/hdqn.ckpt")
+        self.save_path = self.saver.save(self.session, "tmp/hdqn-meta.ckpt")
         print("Meta Model Saved.")
 
-    def load(self):
-        self.saver.restore(self.session, "tmp/hdqn.ckpt")
-        print("Meta Model Restored.")
+

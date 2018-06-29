@@ -1,6 +1,7 @@
 import numpy as np
 from enum import Enum
 import math
+import matplotlib.pyplot as plt
 
 
 class log_tracker:
@@ -12,6 +13,7 @@ class log_tracker:
         self.num_failed = np.zeros(num_epochs)
         self.num_picked_up = np.zeros(num_epochs)
         self.num_success = np.zeros(num_epochs)
+        self.cumulative_rewards = np.zeros(self.num_iterations)
         self.current_episode = 0
         self.current_epoch = 0
         self.current_goal = ""
@@ -26,7 +28,8 @@ class log_tracker:
 
     def update_goal_reached_rate(self):
         self.goal_reached_rate = self.goal_reached / (self.goal_reached + self.goal_failed)
-        self.average_goal_reached_rate = np.average(self.goal_reached_rate[self.current_epoch])
+
+
 
     def log_outcome(self, outcome):
         if (outcome == Outcome.FAILED):
@@ -42,6 +45,9 @@ class log_tracker:
         else:
             self.goal_failed[goal][self.current_epoch] += 1
         self.update_goal_reached_rate()
+
+    def log_reward(self, reward, episode):
+        self.cumulative_rewards[episode] = reward
 
     def reset_log(self):
         self.num_failed[self.current_epoch] = 0
@@ -89,10 +95,16 @@ class log_tracker:
                 print(goal, ":", goal_distribution[goal][epoch], ", ", end="")
             print(" ")
 
+    def plot_cumulative_reward(self):
+        plt.plot(self.cumulative_rewards)
+        plt.ylabel("Cumulative Reward")
+        plt.show()
+
+
     def get_goal_distribution(self):
         goal_distribution = np.zeros((len(self.goal_reached), self.num_epochs))
         for epoch in range(0, self.num_epochs):
-            total = 0
+            total = 1
             for goal in range(0, len(self.goal_reached)):
                 total += self.goal_reached[goal][epoch]
             for goal in range(0, len(self.goal_reached)):
@@ -100,9 +112,9 @@ class log_tracker:
         return goal_distribution
 
     def convert_success_to_percentages(self):
-        self.num_failed_percentage = self.num_failed / (self.num_failed + self.num_picked_up + self.num_success) * 100
-        self.num_picked_up_percentage = self.num_picked_up / (self.num_failed + self.num_picked_up + self.num_success) * 100
-        self.num_success_percentage = self.num_success / (self.num_failed + self.num_picked_up + self.num_success) * 100
+        self.num_failed_percentage = self.num_failed / (self.num_failed + self.num_picked_up + self.num_success + 1) * 100
+        self.num_picked_up_percentage = self.num_picked_up / (self.num_failed + self.num_picked_up + self.num_success+ 1) * 100
+        self.num_success_percentage = self.num_success / (self.num_failed + self.num_picked_up + self.num_success + 1) * 100
 
 
 class Outcome(Enum):
